@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Orders | MusicHub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+<h1 class="logo">📦 My Orders</h1>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist</a>
+    <a href="orders.html">My Orders</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html" id="login-link">Login</a>
+</nav>
+</header>
+
+<section class="section-title">
+<h2>Order History</h2>
+</section>
+
+<section id="ordersList" class="product-grid"></section>
+
+<script>
+const email = localStorage.getItem("currentEmail");
+
+async function loadOrders(){
+
+const res = await fetch(
+`http://localhost:5000/api/orders/myorders?email=${email}`
+);
+
+const orders = await res.json();
+
+const box = document.getElementById("ordersList");
+box.innerHTML = "";
+
+orders.forEach(order=>{
+box.innerHTML += `
+<div class="product-card">
+<h3>Order #${order.id}</h3>
+<p>${order.customer_email}</p>
+<p class="price">₹${order.total_amount}</p>
+<p>${new Date(order.order_date).toLocaleString()}</p>
+</div>`;
+});
+
+if(orders.length===0){
+box.innerHTML="<h2>No Orders Yet</h2>";
+}
+
+}
+
+loadOrders();
+</script>
+
+</body>
+</html>

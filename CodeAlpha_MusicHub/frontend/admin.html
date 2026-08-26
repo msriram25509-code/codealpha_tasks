@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MusicHub Admin</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">🎵 MusicHub Admin</h1>
+
+   <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist</a>
+    <a href="orders.html">My Orders</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html" id="login-link">Login</a>
+</nav>
+</header>
+
+<section class="section-title">
+    <h2>Customer Orders</h2>
+    <p>Live orders from PostgreSQL</p>
+</section>
+
+<div class="admin-container">
+
+<table id="ordersTable">
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Customer</th>
+<th>Email</th>
+<th>Total</th>
+<th>Date</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+async function loadOrders() {
+    try {
+        const response = await fetch("http://localhost:5000/api/admin/orders");
+
+        if (!response.ok) {
+            throw new Error("API Error");
+        }
+
+        const orders = await response.json();
+
+        const tbody = document.querySelector("#ordersTable tbody");
+        tbody.innerHTML = "";
+
+        orders.forEach(order => {
+            tbody.innerHTML += `
+            <tr>
+                <td>${order.id}</td>
+                <td>${order.customer_name}</td>
+                <td>${order.customer_email}</td>
+                <td>₹${order.total_amount}</td>
+                <td>${new Date(order.order_date).toLocaleString()}</td>
+            </tr>`;
+        });
+
+        if (orders.length === 0) {
+            tbody.innerHTML =
+                `<tr><td colspan="5">No Orders Found</td></tr>`;
+        }
+
+    } catch (err) {
+        console.error(err);
+        alert("Cannot connect to Admin API");
+    }
+}
+
+window.onload = loadOrders;
+</script>

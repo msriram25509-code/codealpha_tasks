@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Success | MusicHub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="success-page">
+
+    <div class="success-card">
+
+        <div class="success-icon">✅</div>
+
+        <h1>Payment Successful!</h1>
+
+        <p>Thank you for shopping with MusicHub.</p>
+
+        <h2 id="orderTotal"></h2>
+
+        <button onclick="location.href='orders.html'">
+            View My Orders
+        </button>
+
+        <button onclick="location.href='index.html'" class="buy-btn">
+            Continue Shopping
+        </button>
+
+    </div>
+
+</section>
+
+<script>
+document.getElementById("orderTotal").textContent =
+"Total Paid: ₹" + (localStorage.getItem("lastOrderTotal") || "0");
+</script>
+
+</body>
+</html>

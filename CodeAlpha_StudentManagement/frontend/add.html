@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student - Student Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">CodeAlpha SMS</div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="add.html" class="active">Add Student</a></li>
+                <li><a href="students.html">Students</a></li>
+                <li><a href="index.html" onclick="logout(event)">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="form-container">
+            <h1>Add New Student</h1>
+            
+            <form id="addStudentForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rollNo">Roll Number *</label>
+                    <input type="text" id="rollNo" name="rollNo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="department">Department *</label>
+                        <select id="department" name="department" required>
+                            <option value="">Select Department</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="Civil">Civil</option>
+                            <option value="Electrical">Electrical</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="year">Year *</label>
+                        <select id="year" name="year" required>
+                            <option value="">Select Year</option>
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Add Student</button>
+                    <a href="students.html" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+
+            <div id="successMessage" class="success-message" style="display: none;"></div>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function checkLogin() {
+            if (!localStorage.getItem('isLoggedIn')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        document.getElementById('addStudentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const student = {
+                name: document.getElementById('name').value,
+                roll_no: document.getElementById('rollNo').value,
+                email: document.getElementById('email').value,
+                department: document.getElementById('department').value,
+                year: parseInt(document.getElementById('year').value)
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/students', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(student)
+                });
+
+                if (response.ok) {
+                    const successDiv = document.getElementById('successMessage');
+                    successDiv.textContent = '✓ Student added successfully!';
+                    successDiv.style.display = 'block';
+                    
+                    document.getElementById('addStudentForm').reset();
+                    
+                    setTimeout(() => {
+                        window.location.href = 'students.html';
+                    }, 1500);
+                } else {
+                    const error = await response.json();
+                    showError(error.error || 'Failed to add student');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Error adding student: ' + error.message);
+            }
+        });
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = '✗ ' + message;
+            errorDiv.style.display = 'block';
+        }
+
+        window.addEventListener('load', checkLogin);
+    </script>
+</body>
+</html>

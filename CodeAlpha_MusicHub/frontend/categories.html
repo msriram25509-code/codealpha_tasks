@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories | MusicHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">🎵 MusicHub</h1>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist</a>
+    <a href="orders.html">My Orders</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html" id="login-link">Login</a>
+</nav>
+</header>
+
+<section class="section-title">
+    <h2>Shop by Categories</h2>
+    <p>Choose your favorite musical instrument category</p>
+</section>
+
+<section class="category-grid">
+
+    <div class="category-card" onclick="location.href='products.html?cat=string'">
+        <div class="category-icon">🎸</div>
+        <h3>String Instruments</h3>
+        <p>Guitar & Violin</p>
+    </div>
+
+    <div class="category-card" onclick="location.href='products.html?cat=keyboard'">
+        <div class="category-icon">🎹</div>
+        <h3>Keyboards</h3>
+        <p>Digital Keyboard</p>
+    </div>
+
+    <div class="category-card" onclick="location.href='products.html?cat=studio'">
+        <div class="category-icon">🎤</div>
+        <h3>Studio Equipment</h3>
+        <p>Microphone & Headphones</p>
+    </div>
+
+    <div class="category-card" onclick="location.href='products.html?cat=drums'">
+        <div class="category-icon">🥁</div>
+        <h3>Percussion</h3>
+        <p>Drum Set</p>
+    </div>
+
+</section>
+
+<footer>
+    <h3>🎵 MusicHub</h3>
+    <p>Explore instruments by category</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

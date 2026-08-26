@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | MusicHub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+<h1 class="logo">🎵 MusicHub</h1>
+</header>
+
+<section class="section-title">
+<h2>Checkout</h2>
+<p>Complete your order</p>
+</section>
+
+<section style="display:flex;justify-content:center;padding:40px;">
+
+<form id="checkoutForm" class="product-card" style="width:420px;">
+
+<input type="text" id="name" placeholder="Customer Name" required><br><br>
+
+<input type="email" id="email" placeholder="Customer Email" required><br><br>
+
+<label><strong>Total Amount</strong></label><br><br>
+
+<input type="number" id="total" readonly><br><br>
+
+<button type="submit" style="width:100%;">
+Place Order
+</button>
+
+</form>
+
+</section>
+
+<script>
+// Auto load total
+document.getElementById("total").value =
+localStorage.getItem("checkoutTotal") || 0;
+
+document.getElementById("checkoutForm")
+.addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+const order = {
+customer_name: name.value,
+customer_email: email.value,
+total_amount: Number(total.value)
+};
+
+const response = await fetch(
+"http://localhost:5000/api/orders/place",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(order)
+});
+
+const data = await response.json();
+
+alert(data.message);
+
+if(response.ok){
+
+localStorage.setItem("lastOrderTotal", total.value);
+
+localStorage.removeItem("musicCart");
+localStorage.removeItem("checkoutTotal");
+
+window.location.href="success.html";
+
+}
+
+});
+</script>
+
+</body>
+</html>

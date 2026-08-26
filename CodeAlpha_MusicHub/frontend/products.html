@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | MusicHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">🎵 MusicHub</h1>
+
+   <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist</a>
+    <a href="orders.html">My Orders</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html" id="login-link">Login</a>
+</nav>
+</header>
+
+<section class="section-title">
+    <h2>Our Products</h2>
+    <p>Premium Musical Instruments</p>
+</section>
+
+<!-- Search -->
+<section class="search-box">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Search instruments..."
+        onkeyup="searchProducts()">
+</section>
+
+<section class="product-grid">
+
+    <!-- Guitar -->
+    <div class="product-card search-item">
+        <div class="wishlist" onclick="toggleWishlist('guitar')">♥</div>
+        <img src="images/guitar.jpg" class="product-img"
+             onclick="openProduct('guitar')" alt="Guitar">
+
+        <h3>Acoustic Guitar</h3>
+        <div class="rating">⭐⭐⭐⭐☆ (4.5)</div>
+        <p class="price">₹5,999</p>
+
+        <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <!-- Keyboard -->
+    <div class="product-card search-item">
+        <div class="wishlist" onclick="toggleWishlist('keyboard')">♥</div>
+        <img src="images/keyboard.jpg" class="product-img"
+             onclick="openProduct('keyboard')" alt="Keyboard">
+
+        <h3>Digital Keyboard</h3>
+        <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+        <p class="price">₹8,499</p>
+
+        <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <!-- Microphone -->
+    <div class="product-card search-item">
+        <div class="wishlist" onclick="toggleWishlist('microphone')">♥</div>
+        <img src="images/microphone.jpg" class="product-img"
+             onclick="openProduct('microphone')" alt="Microphone">
+
+        <h3>Studio Microphone</h3>
+        <div class="rating">⭐⭐⭐⭐☆ (4.4)</div>
+        <p class="price">₹3,999</p>
+
+        <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <!-- Headphones -->
+    <div class="product-card search-item">
+        <div class="wishlist" onclick="toggleWishlist('headphones')">♥</div>
+        <img src="images/headphones.jpg" class="product-img"
+             onclick="openProduct('headphones')" alt="Headphones">
+
+        <h3>Studio Headphones</h3>
+        <div class="rating">⭐⭐⭐⭐⭐ (4.9)</div>
+        <p class="price">₹2,499</p>
+
+        <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <!-- Drums -->
+    <div class="product-card search-item">
+        <div class="wishlist" onclick="toggleWishlist('drums')">♥</div>
+        <img src="images/drums.jpg" class="product-img"
+             onclick="openProduct('drums')" alt="Drums">
+
+        <h3>Drum Set</h3>
+        <div class="rating">⭐⭐⭐⭐☆ (4.6)</div>
+        <p class="price">₹15,999</p>
+
+        <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <!-- Violin -->
+    <div class="product-card search-item">
+        <div class="wishlist" onclick="toggleWishlist('violin')">♥</div>
+        <img src="images/violin.jpg" class="product-img"
+             onclick="openProduct('violin')" alt="Violin">
+
+        <h3>Violin</h3>
+        <div class="rating">⭐⭐⭐⭐☆ (4.3)</div>
+        <p class="price">₹6,999</p>
+
+        <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+</section>
+
+<footer>
+    <h3>🎵 MusicHub</h3>
+    <p>CodeAlpha Internship Project</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

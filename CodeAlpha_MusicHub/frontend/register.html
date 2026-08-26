@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | MusicHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">🎵 MusicHub</h1>
+
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist</a>
+    <a href="orders.html">My Orders</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html" id="login-link">Login</a>
+</nav>
+</header>
+
+<section class="section-title">
+    <h2>Create Your Account</h2>
+    <p>Join MusicHub today</p>
+</section>
+
+<section style="display:flex;justify-content:center;padding:40px;">
+
+<form id="registerForm" class="product-card" style="width:400px;">
+
+    <input type="text" id="name" placeholder="Full Name" required><br><br>
+
+    <input type="email" id="email" placeholder="Email" required><br><br>
+
+    <input type="password" id="password" placeholder="Password" required><br><br>
+
+    <button type="submit" style="width:100%;">
+        Register
+    </button>
+
+</form>
+
+</section>
+
+<script>
+document.getElementById("registerForm").addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const user = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+    };
+
+    const response = await fetch("http://localhost:5000/api/auth/register",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify(user)
+
+    });
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    if(response.status===201){
+        window.location.href="login.html";
+    }
+
+});
+</script>
+
+</body>
+</html>

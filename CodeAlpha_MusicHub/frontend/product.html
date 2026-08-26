@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | MusicHub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <h1 class="logo">🎵 MusicHub</h1>
+ <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="categories.html">Categories</a>
+    <a href="wishlist.html">Wishlist</a>
+    <a href="orders.html">My Orders</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html" id="login-link">Login</a>
+</nav>
+</header>
+
+<section class="details-container">
+
+  <div>
+    <img id="productImage" class="details-img">
+  </div>
+
+  <div class="details-info">
+    <h1 id="productName"></h1>
+
+    <div class="rating" id="productRating"></div>
+
+    <h2 class="price" id="productPrice"></h2>
+
+    <p id="productDesc"></p>
+
+    <button id="addBtn">Add to Cart</button>
+
+    <button onclick="location.href='cart.html'" class="buy-btn">
+      Buy Now
+    </button>
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

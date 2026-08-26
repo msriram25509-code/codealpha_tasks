@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login | MusicHub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <h1 class="logo">🎵 MusicHub</h1>
+</header>
+
+<section style="display:flex;justify-content:center;padding:60px;">
+  <form id="loginForm" class="product-card" style="width:400px;">
+    <h2>Login</h2><br>
+
+    <input type="email" id="email" placeholder="Email" required><br><br>
+
+    <input type="password" id="password" placeholder="Password" required><br><br>
+
+    <button type="submit" style="width:100%;">Login</button>
+
+    <p style="margin-top:15px;text-align:center;">
+      Don't have an account?
+      <a href="register.html">Register</a>
+    </p>
+  </form>
+</section>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const user = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+    };
+
+    try {
+        const response = await fetch("http://localhost:5000/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        });
+
+        const data = await response.json();
+
+        alert(data.message);
+if (response.ok) {
+    localStorage.setItem("currentUser", data.name);
+    localStorage.setItem("currentEmail", user.email);
+
+    window.location.href = "index.html";
+}
+    } catch (err) {
+        alert("Cannot connect to backend!");
+        console.error(err);
+    }
+});
+</script>
+
+</body>
+</html>
